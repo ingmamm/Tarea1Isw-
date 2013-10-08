@@ -6,12 +6,13 @@
  */
 
    /*-----------------------------------------------*
-     |     Ingenieria en Software:                   |
+     |     Ingenieria en Software                    |
      |                                               |
-     |     Integrante: Adrian Gutierrez              |
+     |     Integrantes: Adrian Gutierrez             |
      |                                               |
-     |                 Miguel Maraboli Mendez.       |
+     |                 Miguel Maraboli Mendez        |
      |                                               |
+     |                 Valery Soto Lastra            |
      |                                               |
      *-----------------------------------------------*/
 
