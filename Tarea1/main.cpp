@@ -94,7 +94,8 @@ void acercaDe()
 
 
         cout<<"\n\n\t\tIntegrantes: Adrian Gutierrez .\n"
-            <<"\t                   Miguel Maraboli Mendez.\n";
+            <<"\t                   Miguel Maraboli Mendez.\n"
+            <<"\t                   Valery Soto Lastra.\n";
            
 
 }
