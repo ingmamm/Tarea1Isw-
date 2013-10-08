@@ -28,8 +28,9 @@ using namespace std;
 
 void acercaDe();
 void error();
-void integrar(char cadena);
-void integrarDesdeHasta(char cadena);
+void integrar(char cadena[]);
+void integrarDesdeHasta(char cadena[],int lI,int lS);
+int convLetrasNum(char cadena[]);
 
 int main(int argc, char** argv)
 {
@@ -52,15 +53,20 @@ int main(int argc, char** argv)
 
                             if(simbolo=='i' && argc==2)
                                  {
-                                integrar(argv[2][0]);
+                                  integrar(argv[2][]);
 
                                  }
 
 
                             if(simbolo=='g' && argc==4)
                                 {
+                                int lI,lS;
                                 
-                                    integrarDesdeHasta(); 
+                                lI=convLetrasNum(argv[3][]);
+                                lS=convLetrasNum(argv[4][]);
+                                          
+                                   
+                                    integrarDesdeHasta(argv[2][],lI,lS); 
                                 }
 
 
@@ -104,11 +110,37 @@ void error(){
 
 
 }
-void integrar(char cadena){
+void integrar(char cadena[]){
+    
+    
+    cout<<"polinomio:"+ <<cadena[];
     
 
 }
-void integrarDesdeHasta(char cadena){
+void integrarDesdeHasta(char cadena[],int lI,int lS){
     
+
+}
+int convLetrasNum(char cadena[]){
+    
+      int  largoCadena,numero;
+      
+      largoCadena = strlen( cadena);
+      
+        if(largoCadena>0)
+        {
+          for(int i=0;i<largoCadena;i++){
+
+              numero = int(cadena[i]);
+
+              for (int j = 0; i < (largoCadena-i); j++) {
+                  numero*=10;
+
+              }
+
+
+          }
+      }
+      return largoCadena;
 
 }
