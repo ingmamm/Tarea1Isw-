@@ -36,6 +36,9 @@
       <compileType>
       </compileType>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
+        <ccTool>
+          <commandLine>-v</commandLine>
+        </ccTool>
       </item>
     </conf>
     <conf name="Release" type="1">

@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   main.cpp
  * Author: Samsung
  *
@@ -28,21 +28,24 @@ using namespace std;
 
 void acercaDe();
 void error();
-void integrar(char cadena[]);
-void integrarDesdeHasta(char cadena[],int lI,int lS);
-int convLetrasNum(char cadena[]);
+void integrar(char* cadena);
+void integrarDesdeHasta(char* cadena,int lI,int lS);
+int convLetrasNum(char* cadena);
 
-int main(int argc, char** argv)
+int main(int argc, char** argv)       ///argv[0][0] argv[1][0] argv[2][0]
 {
     cout<<"hola mundo";
-   if (argc < 1)  //si no tiene parametros imprime la ayuda
+    
+    
+   if (argc <= 1)  //si no tiene parametros imprime la ayuda
     {
+      cout<<"error"; 
       error();
     }
         else
             {
 
-               
+
                 char simbolo = argv[1][0];
 
                 if(simbolo == '-')
@@ -51,9 +54,11 @@ int main(int argc, char** argv)
                      simbolo = argv[1][1];
 
 
-                            if(simbolo=='i' && argc==2)
+                            if(simbolo=='i' &&  argc ==3)
                                  {
-                                  integrar(argv[2][]);
+                                
+                                  cout<<"va a integrar.";
+                                  integrar( &argv[2][0]);
 
                                  }
 
@@ -61,12 +66,12 @@ int main(int argc, char** argv)
                             if(simbolo=='g' && argc==4)
                                 {
                                 int lI,lS;
-                                
-                                lI=convLetrasNum(argv[3][]);
-                                lS=convLetrasNum(argv[4][]);
-                                          
-                                   
-                                    integrarDesdeHasta(argv[2][],lI,lS); 
+
+                                lI=convLetrasNum(&argv[3][1]);
+                                lS=convLetrasNum(&argv[4][1]);
+
+                                cout<<"integrandocon parametros"<<lI<<lS;
+                                // integrarDesdeHasta(&argv[2][1],lI,lS);
                                 }
 
 
@@ -100,33 +105,43 @@ void acercaDe()
 
 
         cout<<"\n\n\t\tIntegrantes: Adrian Gutierrez .\n"
-            <<"\t                   Miguel Maraboli Mendez.\n"
-            <<"\t                   Valery Soto Lastra.\n";
-           
+            <<"\t\t             Miguel Maraboli Mendez.\n"
+            <<"\t\t             Valery Soto Lastra.\n";
+
 
 }
 void error(){
-            cout<<"\nSin Parametros.\n";
+            
+    cout<<"\nSin Parametros.\n";
 
 
 }
-void integrar(char cadena[]){
-    
-    
-    cout<<"polinomio:"+ <<cadena[];
-    
+void integrar(char* cadena){
+
+        cout<<" integrando."<<endl;
+        int tamano= strlen( cadena);
+        cout<<"polinomio^:";
+        
+    for (int i = 0; i < tamano; i++) {
+        cout<<*cadena;
+        cadena++;
+
+
+    }
+        
+      
 
 }
-void integrarDesdeHasta(char cadena[],int lI,int lS){
-    
+void integrarDesdeHasta(char* cadena,int lI,int lS){
+
 
 }
-int convLetrasNum(char cadena[]){
-    
+int convLetrasNum(char* cadena){
+
       int  largoCadena,numero;
-      
+
       largoCadena = strlen( cadena);
-      
+
         if(largoCadena>0)
         {
           for(int i=0;i<largoCadena;i++){
@@ -140,7 +155,10 @@ int convLetrasNum(char cadena[]){
 
 
           }
+
       }
-      return largoCadena;
+      else{ return -1;}
+
+      return numero;
 
 }
