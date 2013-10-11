@@ -118,16 +118,39 @@ void error(){
 }
 void integrar(char* cadena){
 
-        cout<<" integrando."<<endl;
-        int tamano= strlen( cadena);
-        cout<<"polinomio^:";
         
-    for (int i = 0; i < tamano; i++) {
-        cout<<*cadena;
-        cadena++;
+    //void Separar(char cadena)
+
+      char simbolo;
+      int contador=0;
+      while(simbolo!='+')
+      {
+          simbolo=cadena[contador];
+          contador++;
+      }
+      char cadena2[contador];
+      //cout<<contador;
+      for(int i=0;i<=contador;i++)
+      {
+          if(cadena[i]=='^'){
+
+            cadena2[i]='^';
+          }
+          else{
+
+          cadena2[i]=cadena[i];
+
+        }
+          cout<<cadena2[i]; //para ver que pasa xd
+        }
 
 
-    }
+      cout<<"monomio: "<<cadena2; //no imprime la cadena2
+
+
+}
+    //void integrar()
+    //void Casos()
         
       
 
