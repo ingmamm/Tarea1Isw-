@@ -119,42 +119,28 @@ void error(){
 void integrar(char* cadena){
 
         
-    //void Separar(char cadena)
+    string polinomio = cadena;
+    string subcadena;
+    int largo,posicion;
+    do{
+            posicion = polinomio.find('+');
+            largo = strlen(cadena);
+            subcadena = polinomio.substr(0,posicion);
+            cout<<subcadena<<endl;
+            polinomio = polinomio.substr(posicion+2,largo); //aqui nosé...
 
-      char simbolo;
-      int contador=0;
-      while(simbolo!='+')
-      {
-          simbolo=cadena[contador];
-          contador++;
-      }
-      char cadena2[contador];
-      //cout<<contador;
-      for(int i=0;i<=contador;i++)
-      {
-          if(cadena[i]=='^'){
-
-            cadena2[i]='^';
-          }
-          else{
-
-          cadena2[i]=cadena[i];
-
-        }
-          cout<<cadena2[i]; //para ver que pasa xd
-        }
-
-
-      cout<<"monomio: "<<cadena2; //no imprime la cadena2
-
+    //cout<<subcadena<<endl;
+    //cout<<polinomio;
+    }while(largo!=0);
+//Tira un error, pero se que vamos por buen camino, almenos la primera subcadena funciona...
 
 }
     //void integrar()
     //void Casos()
+    //void separar()
         
       
 
-}
 void integrarDesdeHasta(char* cadena,int lI,int lS){
 
 
