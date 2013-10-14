@@ -18,9 +18,11 @@
 
 #include <iostream>
 #include <cmath>
+#include <vector>
 #include <ctime>
 #include <fstream>
-#include <string.h>
+#include <cstring>
+#include <cstdlib>
 
 
 
@@ -30,11 +32,11 @@ void acercaDe();
 void error();
 void integrar(char* cadena);
 void integrarDesdeHasta(char* cadena,int lI,int lS);
-int convLetrasNum(char* cadena);
+
 
 int main(int argc, char** argv)       ///argv[0][0] argv[1][0] argv[2][0]
 {
-    cout<<"hola mundo";
+    //cout<<"hola mundo"; era para la suerte nomas
     
     
    if (argc <= 1)  //si no tiene parametros imprime la ayuda
@@ -63,20 +65,27 @@ int main(int argc, char** argv)       ///argv[0][0] argv[1][0] argv[2][0]
                                  }
 
 
-                            if(simbolo=='g' && argc==4)
+                            if(simbolo=='g' && argc==5)
                                 {
                                 int lI,lS;
-
-                                lI=convLetrasNum(&argv[3][1]);
-                                lS=convLetrasNum(&argv[4][1]);
-
-                                cout<<"integrandocon parametros"<<lI<<lS;
-                                // integrarDesdeHasta(&argv[2][1],lI,lS);
+                                char *cadena;
+                               
+                                cadena=&argv[3][0];
+                                lI=atoi(cadena);
+                                cadena=&argv[4][0];
+                                lS=atoi(cadena);
+                                
+                                if(lS<0 || lI<0){
+                                  cout<<"\t\nLos limites deben ser mayor o igual a cero"<<endl;    
                                 }
+                                else{
+                                        // integrarDesdeHasta(&argv[2][1],lI,lS);
+                                        }
+                               }
 
-
-                            if(simbolo=='v')
+                            if(simbolo=='v'&& argc==2)
                                 {
+                                
                                      acercaDe();  //procedimiento acerca de
                                 }
 
@@ -118,16 +127,29 @@ void error(){
 }
 void integrar(char* cadena){
 
-        
+    vector <string> monomios;     
     string polinomio = cadena;
     string subcadena;
-    int largo,posicion;
+    int largo,posicion=0;
     do{
+        
+        
             posicion = polinomio.find('+');
-            largo = strlen(cadena);
-            subcadena = polinomio.substr(0,posicion);
-            cout<<subcadena<<endl;
-            polinomio = polinomio.substr(posicion+2,largo); //aqui nosé...
+            
+            if(polinomio.find('+') )
+            {
+                largo = polinomio.length();
+                subcadena = polinomio.substr(0,posicion);
+                monomios.push_back(subcadena);
+                cout<<subcadena<<endl;
+                polinomio = polinomio.substr(posicion+1,largo);
+                posicion=0;
+            }
+        else
+            {
+                largo=0;
+            }
+            
 
     //cout<<subcadena<<endl;
     //cout<<polinomio;
@@ -135,39 +157,11 @@ void integrar(char* cadena){
 //Tira un error, pero se que vamos por buen camino, almenos la primera subcadena funciona...
 
 }
-    //void integrar()
-    //void Casos()
-    //void separar()
-        
+    
       
 
 void integrarDesdeHasta(char* cadena,int lI,int lS){
+    
 
-
-}
-int convLetrasNum(char* cadena){
-
-      int  largoCadena,numero;
-
-      largoCadena = strlen( cadena);
-
-        if(largoCadena>0)
-        {
-          for(int i=0;i<largoCadena;i++){
-
-              numero = int(cadena[i]);
-
-              for (int j = 0; i < (largoCadena-i); j++) {
-                  numero*=10;
-
-              }
-
-
-          }
-
-      }
-      else{ return -1;}
-
-      return numero;
 
 }
