@@ -136,7 +136,7 @@ void integrar(char* cadena){
         
             posicion = polinomio.find('+');
             
-            if(polinomio.find('+') )
+            if(posicion !=std::string::npos )
             {
                 largo = polinomio.length();
                 subcadena = polinomio.substr(0,posicion);
@@ -147,6 +147,9 @@ void integrar(char* cadena){
             }
         else
             {
+                subcadena = polinomio.substr(0,largo);
+                monomios.push_back(subcadena);
+                cout<<subcadena<<endl;
                 largo=0;
             }
             
