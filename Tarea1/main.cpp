@@ -36,62 +36,46 @@ void integrarDesdeHasta(char* cadena,int lI,int lS);
 
 int main(int argc, char** argv)       ///argv[0][0] argv[1][0] argv[2][0]
 {
-    //cout<<"hola mundo"; era para la suerte nomas
+    char * cadena = *argv;
     
     
-   if (argc <= 1)  //si no tiene parametros imprime la ayuda
+    
+    if (argc <= 1)  //si no tiene parametros imprime la ayuda
     {
       cout<<"error"; 
       error();
     }
-        else
-            {
+    else
+    {
 
 
-                char simbolo = argv[1][0];
+                char simbolo = cadena[0];
 
                 if(simbolo == '-')
                 {
 
-                     simbolo = argv[1][1];
+                            simbolo = cadena[1];
 
 
                             if(simbolo=='i' &&  argc ==3)
-                                 {
-                                
-                                  cout<<"va a integrar.";
-                                  integrar( &argv[2][0]);
-
-                                 }
-
-
-                            if(simbolo=='g' && argc==5)
-                                {
-                                int lI,lS;
-                                char *cadena;
-                               
-                                cadena=&argv[3][0];
-                                lI=atoi(cadena);
-                                cadena=&argv[4][0];
-                                lS=atoi(cadena);
-                                
-                                if(lS<0 || lI<0){
-                                  cout<<"\t\nLos limites deben ser mayor o igual a cero"<<endl;    
-                                }
-                                else{
-                                        // integrarDesdeHasta(&argv[2][1],lI,lS);
-                                        }
-                               }
+                            {
+                                  
+                                  string str = cadena;
+                                  int indice = str.find("x");
+                                  string polinomio= str.substr(indice, str.length()-1);
+                                  
+                                  cout<<"va a integrar."<<"\n \n";
+                                  integrar(polinomio);
+                            }
 
                             if(simbolo=='v'&& argc==2)
-                                {
+                            {
                                 
                                      acercaDe();  //procedimiento acerca de
-                                }
+                            }
 
                 }
-            }
-
+    }
     return 0;
 }
 
@@ -125,46 +109,69 @@ void error(){
 
 
 }
-void integrar(char* cadena){
-
-    vector <string> monomios;     
-    string polinomio = cadena;
-    string subcadena;
-    int largo,posicion=0;
-    do{
+void integrar(string funcion)
+{
+	stringstream result;
+	int pos = funcion.find('x');
+	if(pos < funcion.length())
+	{
+		float cons = getCons(funcion);
+		int expo = getExpo(funcion);
+		expo += 1;
+		if (expo < 0 && cons < 0)
+		{
+			expo *= -1 ; cons *= -1;
+		}
+		result << cons <<"/" << expo <<"*x^" << expo ;
+	}
+	else
+		result << atoi(funcion.c_str()) << "*x";
+	
+        cout<< "La funcion "<< funcion << "integrada es " << result.str();
         
-        
-            posicion = polinomio.find('+');
-            
-            if(posicion !=std::string::npos )
-            {
-                largo = polinomio.length();
-                subcadena = polinomio.substr(0,posicion);
-                monomios.push_back(subcadena);
-                cout<<subcadena<<endl;
-                polinomio = polinomio.substr(posicion+1,largo);
-                posicion=0;
-            }
-        else
-            {
-                subcadena = polinomio.substr(0,largo);
-                monomios.push_back(subcadena);
-                cout<<subcadena<<endl;
-                largo=0;
-            }
-            
-
-    //cout<<subcadena<<endl;
-    //cout<<polinomio;
-    }while(largo!=0);
-//Tira un error, pero se que vamos por buen camino, almenos la primera subcadena funciona...
-
 }
-    
-      
 
-void integrarDesdeHasta(char* cadena,int lI,int lS){
-    
+int getExpo(string polinomio)
+{
+	string expo = "";
+	int pos= polinomio.find("^");
+	//se busca el ^, de ah� en adelante ser� el n�mero del exponente
+	if(pos < polinomio.length())
+	{
+		expo = polinomio.substr(pos+1,polinomio.length());
+		return atoi(expo.c_str());
+	}
+	else
+		//si no contiene ^ entonces el exponente es 1
+		return 1;
+}
 
-
+float getCons(string polinomio)
+{
+	string cons;
+	int pos = polinomio.find("*");
+	if (pos < polinomio.length())
+	{
+		//se obtiene el substring desde el inicio hasta donde llega el por
+		// 123412*x...
+		cons = polinomio.substr(0,pos);
+        
+        // Ahora compruebo si hay un /, indicando una division
+        pos = cons.find("/");
+        if(pos < cons.length()) // Encontre una division, realizarla!
+        {
+            float numerador = atoi(cons.substr(0, pos).c_str());
+            int denominador = atoi(cons.substr(pos + 1, cons.length()).c_str());
+            return numerador / denominador;
+        }
+        else
+            return atoi(cons.c_str());
+	}
+	else
+	{
+		//puede que sea x^i o -x^i,  hay que capturar el - si fuera negativo
+		if (polinomio[0] == '-')
+			return -1;
+		return 1;
+	}
 }
