@@ -140,8 +140,6 @@ void integrar(string polinomio)
                         cout<< " + ";
                 }
 	}
-	
-        cout<< "La funcion "<< polinomio << "integrada es " << integral;
         
 }
 
