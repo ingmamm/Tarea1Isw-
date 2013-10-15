@@ -63,7 +63,7 @@ int main(int argc, char** argv)
 
                             if(simbolo=='i' &&  argc ==3) //verificamos si el comando corresponde a la integral
                             {
-                                  
+                                  char *cadena= &argv[2][0];
                                   string str = cadena;
                                   int indice = str.find("x"); //se busca la primera x del polinomio como pivote para sacar substring de polinomio
                                   string polinomio= str.substr(indice, str.length()-1);//obtenemos polinomio puro
@@ -81,6 +81,7 @@ int main(int argc, char** argv)
                                 lI=atoi(cadena);
                                 cadena=&argv[4][0];
                                 lS=atoi(cadena);
+                                cadena= &argv[2][0]; //polinomio 
                                 
                                 if(lS<0 || lI<0){
                                   cout<<"\t\nLos limites deben ser mayor o igual a cero"<<endl;    
