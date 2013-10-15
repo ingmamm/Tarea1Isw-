@@ -40,7 +40,7 @@ void integrarDesdeHasta(char* cadena,int lI,int lS);
 
 int main(int argc, char** argv)   
 {
-    char * cadena = *argv; //Se transfiere a una cadena, para trabajar con nombre generico
+    //char * cadena = *argv; //Se transfiere a una cadena, para trabajar con nombre generico
     
     
     
@@ -53,12 +53,12 @@ int main(int argc, char** argv)
     {
 
 
-                char simbolo = cadena[0]; 
+                char simbolo = argv[1][0]; 
 
                 if(simbolo == '-') //comparacion del inicio del comando
                 {
 
-                            simbolo = cadena[1];
+                            simbolo = argv[1][1];
 
 
                             if(simbolo=='i' &&  argc ==3) //verificamos si el comando corresponde a la integral
