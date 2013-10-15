@@ -32,14 +32,15 @@ void acercaDe();
 void error();
 void integrar(string polinomio);
 int getExpo(string polinomio);
-float getCons(string polinomio);
+float obtenerCoef(string cadena);
+int obtenerExp(string cadena);
 
 void integrarDesdeHasta(char* cadena,int lI,int lS);
 
 
-int main(int argc, char** argv)       ///argv[0][0] argv[1][0] argv[2][0]
+int main(int argc, char** argv)   
 {
-    char * cadena = *argv;
+    char * cadena = *argv; //Se transfiere a una cadena, para trabajar con nombre generico
     
     
     
@@ -52,19 +53,19 @@ int main(int argc, char** argv)       ///argv[0][0] argv[1][0] argv[2][0]
     {
 
 
-                char simbolo = cadena[0];
+                char simbolo = cadena[0]; 
 
-                if(simbolo == '-')
+                if(simbolo == '-') //comparacion del inicio del comando
                 {
 
                             simbolo = cadena[1];
 
 
-                            if(simbolo=='i' &&  argc ==3)
+                            if(simbolo=='i' &&  argc ==3) //verificamos si el comando corresponde a la integral
                             {
                                   
                                   string str = cadena;
-                                  int indice = str.find("x");
+                                  int indice = str.find("x"); //se busca la primera x del polinomio como pivote para sacar substring de polinomio
                                   string polinomio= str.substr(indice, str.length()-1);
                                   
                                   cout<<"va a integrar."<<"\n \n";
@@ -123,8 +124,8 @@ void integrar(string polinomio)
         
 	while (pivote != -1)
 	{
-		float coeficiente = getCons(subpoli);
-		int exponente = getExpo(subpoli);
+		float coeficiente = obtenerCoef(subpoli);
+		int exponente = obtenerExp(subpoli);
 		exponente += 1;
 		if (exponente < 0 && coeficiente < 0)
 		{
@@ -143,47 +144,51 @@ void integrar(string polinomio)
         
 }
 
-int getExpo(string polinomio)
+int obtenerExp(string cadena)
 {
-	string expo = "";
-	int pos= polinomio.find("^");
-	//se busca el ^, de ah� en adelante ser� el n�mero del exponente
-	if(pos < polinomio.length())
+	string exp ;
+        int exponente;
+	int posicion= cadena.find("^");
+	
+	if(posicion !=std::string::npos )
 	{
-		expo = polinomio.substr(pos+1,polinomio.length());
-		return atoi(expo.c_str());
+		exp = cadena.substr(posicion+1,cadena.length());
+		exponente = atoi(exp.c_str());
 	}
 	else
+        {
 		//si no contiene ^ entonces el exponente es 1
-		return 1;
+		exponente= 1;
+        }
+        return exponente;
 }
 
-float getCons(string polinomio)
+float obtenerCoef(string cadena)
 {
-	string cons;
-	int pos = polinomio.find("*");
-	if (pos < polinomio.length())
+	string coeficiente;
+        float coef;
+	int posicion = cadena.find("*");
+	if (posicion !=std::string::npos)
 	{
-		//se obtiene el substring desde el inicio hasta donde llega el por
-		// 123412*x...
-		cons = polinomio.substr(0,pos);
+		
+		coeficiente = cadena.substr(0,posicion);
         
-        // Ahora compruebo si hay un /, indicando una division
-        pos = cons.find("/");
-        if(pos < cons.length()) // Encontre una division, realizarla!
+        
+        posicion = coeficiente.find("/");
+        if(posicion !=std::string::npos) 
         {
-            float numerador = atoi(cons.substr(0, pos).c_str());
-            int denominador = atoi(cons.substr(pos + 1, cons.length()).c_str());
-            return numerador / denominador;
+            float numerador = atoi(coeficiente.substr(0, posicion).c_str());
+            float denominador = atoi(coeficiente.substr(posicion + 1, coeficiente.length()).c_str());
+            coef = numerador / denominador;
         }
         else
-            return atoi(cons.c_str());
+            coef = atoi(coeficiente.c_str());
 	}
 	else
 	{
-		//puede que sea x^i o -x^i,  hay que capturar el - si fuera negativo
-		if (polinomio[0] == '-')
-			return -1;
-		return 1;
+		
+		
+		coef = 1;
 	}
+        return coef;
 }
