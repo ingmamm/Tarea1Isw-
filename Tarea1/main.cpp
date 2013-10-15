@@ -30,7 +30,10 @@ using namespace std;
 
 void acercaDe();
 void error();
-void integrar(char* cadena);
+void integrar(string polinomio);
+int getExpo(string polinomio);
+float getCons(string polinomio);
+
 void integrarDesdeHasta(char* cadena,int lI,int lS);
 
 
@@ -109,25 +112,36 @@ void error(){
 
 
 }
-void integrar(string funcion)
+void integrar(string polinomio)
 {
-	stringstream result;
-	int pos = funcion.find('x');
-	if(pos < funcion.length())
+	string integral;
+	int pivote = polinomio.find("+");
+        
+        string subpoli = polinomio.substr(0,pivote);
+        
+        cout<< "La funcion "<< polinomio << "integrada es ";
+        
+	while (pivote != -1)
 	{
-		float cons = getCons(funcion);
-		int expo = getExpo(funcion);
-		expo += 1;
-		if (expo < 0 && cons < 0)
+		float coeficiente = getCons(subpoli);
+		int exponente = getExpo(subpoli);
+		exponente += 1;
+		if (exponente < 0 && coeficiente < 0)
 		{
-			expo *= -1 ; cons *= -1;
+			exponente *= -1 ; coeficiente *= -1;
 		}
-		result << cons <<"/" << expo <<"*x^" << expo ;
+		cout<< "(" << coeficiente  << "/" << exponente << ")" << "*x^" << exponente ;
+                
+                if(pivote != -1)
+                {
+                        string aux = polinomio.substr(pivote,polinomio.length());
+                        pivote = aux.find("+");
+                        subpoli = aux.substr(0,pivote);
+                        cout<< " + ";
+                }
 	}
-	else
-		result << atoi(funcion.c_str()) << "*x";
 	
-        cout<< "La funcion "<< funcion << "integrada es " << result.str();
+        cout<< "La funcion "<< polinomio << "integrada es " << integral;
         
 }
 
