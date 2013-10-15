@@ -71,6 +71,25 @@ int main(int argc, char** argv)
                                   cout<<"va a integrar."<<"\n \n";
                                   integrar(polinomio);//llamada a funcion
                             }
+                            
+                              if(simbolo=='g' && argc==5)
+                                {
+                                int lI,lS;
+                                char *cadena;
+                               
+                                cadena=&argv[3][0];
+                                lI=atoi(cadena);
+                                cadena=&argv[4][0];
+                                lS=atoi(cadena);
+                                
+                                if(lS<0 || lI<0){
+                                  cout<<"\t\nLos limites deben ser mayor o igual a cero"<<endl;    
+                                }
+                                else{
+                                	cout<<"\nFuncion no disponible.";
+                                        // integrarDesdeHasta(&argv[2][1],lI,lS);
+                                        }
+                               }
 
                             if(simbolo=='v'&& argc==2)
                             {
