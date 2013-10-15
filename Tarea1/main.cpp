@@ -66,10 +66,10 @@ int main(int argc, char** argv)
                                   
                                   string str = cadena;
                                   int indice = str.find("x"); //se busca la primera x del polinomio como pivote para sacar substring de polinomio
-                                  string polinomio= str.substr(indice, str.length()-1);
+                                  string polinomio= str.substr(indice, str.length()-1);//obtenemos polinomio puro
                                   
                                   cout<<"va a integrar."<<"\n \n";
-                                  integrar(polinomio);
+                                  integrar(polinomio);//llamada a funcion
                             }
 
                             if(simbolo=='v'&& argc==2)
@@ -85,7 +85,7 @@ int main(int argc, char** argv)
 
 
 
-void acercaDe()
+void acercaDe() //informacion de compilacion
 {
         time_t tSac = time(NULL);  // instante actual
 
@@ -116,28 +116,28 @@ void error(){
 void integrar(string polinomio)
 {
 	string integral;
-	int pivote = polinomio.find("+");
+	int pivote = polinomio.find("+"); //buscamos pivote 
         
-        string subpoli = polinomio.substr(0,pivote);
+        string subpoli = polinomio.substr(0,pivote); //creamos un monomio ej: x^2
         
         cout<< "La funcion "<< polinomio << "integrada es ";
         
-	while (pivote != -1)
+	while (pivote != -1)//mientras halle el pivote
 	{
-		float coeficiente = obtenerCoef(subpoli);
-		int exponente = obtenerExp(subpoli);
+		float coeficiente = obtenerCoef(subpoli);//buscamos el coeficiente
+		int exponente = obtenerExp(subpoli);//buscamos exponente
 		exponente += 1;
 		if (exponente < 0 && coeficiente < 0)
 		{
 			exponente *= -1 ; coeficiente *= -1;
 		}
-		cout<< "(" << coeficiente  << "/" << exponente << ")" << "*x^" << exponente ;
+		cout<< "(" << coeficiente  << "/" << exponente << ")" << "*x^" << exponente ;//reescribimos polinomio integrado
                 
-                if(pivote != -1)
+                if(pivote != -1)//si aun existe pivote
                 {
-                        string aux = polinomio.substr(pivote,polinomio.length());
+                        string aux = polinomio.substr(pivote,polinomio.length());//buscamos el siguiente pivote en el resto del polinomio
                         pivote = aux.find("+");
-                        subpoli = aux.substr(0,pivote);
+                        subpoli = aux.substr(0,pivote);//nuevo monio a buscar
                         cout<< " + ";
                 }
 	}
